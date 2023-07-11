@@ -26,5 +26,10 @@ namespace PersonalNovelist_Windows.Page.Other
             InitializeComponent();
         }
 
+        private void Close_Software (object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

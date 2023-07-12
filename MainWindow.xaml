@@ -57,6 +57,10 @@
                 </MenuItem>
             </Menu>
         </Grid>
+        <!--主界面-->
+        <Grid Grid.Row="1">
+            <Page Name="dd"/>
+        </Grid>
         
         
     </Grid>

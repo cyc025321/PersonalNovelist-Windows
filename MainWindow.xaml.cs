@@ -14,7 +14,8 @@ using System.Windows.Navigation;
 using System.IO;
 using System.Windows.Shapes;
 using Path = System.IO.Path;
-using PersonalNovelist_Windows.Page.Other;
+using PersonalNovelist_Windows.Pages.Other;
+using PersonalNovelist_Windows.Pages;
 
 namespace PersonalNovelist_Windows
 {
@@ -25,7 +26,9 @@ namespace PersonalNovelist_Windows
     {
         public MainWindow()
         {
+            dd.Content = new BookShelves();
             InitializeComponent();
+            
         }
 
         private void SoftwareAbout_click (object sender, RoutedEventArgs e)

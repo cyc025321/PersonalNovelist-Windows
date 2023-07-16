@@ -52,14 +52,14 @@
                     <MenuItem Header="_首选项" Icon="{materialDesign:PackIcon Kind=Cog}" />
                 </MenuItem>
                 <MenuItem Header="_帮助" Height="Auto">
-                    <MenuItem Header="_使用手册" Icon="{materialDesign:PackIcon Kind=BookOpenOutline}" />
+                    <MenuItem Header="_使用手册" Icon="{materialDesign:PackIcon Kind=BookOpenOutline}"/>
                     <MenuItem Header="_关于" Icon="{materialDesign:PackIcon Kind=Information}" Click="SoftwareAbout_click"/>
                 </MenuItem>
             </Menu>
         </Grid>
         <!--主界面-->
         <Grid Grid.Row="1">
-            <Page Name="dd"/>
+            <ContentControl x:Name="BookShelve"/>
         </Grid>
         
         

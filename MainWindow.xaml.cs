@@ -26,9 +26,9 @@ namespace PersonalNovelist_Windows
     {
         public MainWindow()
         {
-            dd.Content = new BookShelves();
             InitializeComponent();
-            
+            BookShelve.Content = new BookShelves();
+
         }
 
         private void SoftwareAbout_click (object sender, RoutedEventArgs e)
@@ -36,5 +36,6 @@ namespace PersonalNovelist_Windows
             SoftWareAbout softWareAbout = new SoftWareAbout();
             softWareAbout.Show();
         }
+
     } 
 }

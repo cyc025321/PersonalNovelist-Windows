@@ -12,17 +12,33 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CommunityToolkit.Mvvm;
+using PersonalNovelist_Windows.ViewModels;
+using PersonalNovelist_Windows.Pages.Other;
+using PersonalNovelist_Windows.Data;
 
 namespace PersonalNovelist_Windows.Pages
 {
     /// <summary>
     /// BookShelves.xaml 的交互逻辑
     /// </summary>
-    public partial class BookShelves : Page
+    public partial class BookShelves : UserControl
     {
         public BookShelves()
         {
             InitializeComponent();
+            this.DataContext = new BookShelfViewModel();
+            aa.Content = new BookCard();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SQLiteClass.CreateDB();
+            SQLiteClass.CreateTable();
+            //BookCard mid = new BookCard();
+            //mid.Margin = new Thickness(20);
+            // 将新控件添加到StackPanel中
+            //BookShelvePanel.Children.Add(mid);
         }
     }
 }

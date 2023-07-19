@@ -5,21 +5,66 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewmodels="clr-namespace:PersonalNovelist_Windows.ViewModels"
              xmlns:local="clr-namespace:PersonalNovelist_Windows.Pages"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" d:DataContext="{d:DesignInstance Type=viewmodels:BookShelfViewModel}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
+             d:DataContext="{d:DesignInstance Type={x:Type viewmodels:BookShelfViewModel}}"       
              x:Class="PersonalNovelist_Windows.Pages.BookShelves"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Cursor="Hand">
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <WrapPanel Name="BookShelvePanel">
-                <ContentControl Name="aa" Height="Auto" Margin="20"/>
-                <TextBlock Text="Old" Margin="10,10"/>
-                <TextBlock Text="ListBox" Margin="10,10"/>
-                <TextBlock Text="Full of junk" Margin="10,10"/>
+            <WrapPanel x:Name="BookShelvePanel">
+                <!--添加书籍按钮-->
+                <Button Margin="20,0,0,0" Command="{Binding AddBookInfmaEventCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Width" Value="140"/>
+                            <Setter Property="Height" Value="180"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" BorderBrush="#34495e" BorderThickness="2"
+                                                CornerRadius="12">
+                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120">
+                                                <fa:FontAwesome Icon="Plus" Foreground="#2c3e50"/>
+                                            </TextBlock>
+                                        </Border>
+                                        <!--设置鼠标放在按钮样式和点击样式-->
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#ecf0f1"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="False">
+                                                <Setter Property="Background" Value="{StaticResource PrimaryHueLightBrush}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource PrimaryHueMidBrush}"/>
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect ShadowDepth="2" BlurRadius="12" Color="#2c3e50" Opacity="1" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+
+                            </Setter>
+
+                        </Style>
+                        
+                    </Button.Style>
+                    <!--<materialDesign:PackIcon Kind="AddBold" />-->
+                </Button>
+
+
+                <ContentControl x:Name="aa" Height="Auto" Margin="20" IsEnabled="True"/>
+                
             </WrapPanel>
         </Grid>
         <Grid Grid.Row="1">

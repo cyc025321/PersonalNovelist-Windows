@@ -5,9 +5,12 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MaterialDesignThemes.Wpf;
+using PersonalNovelist_Windows.Pages.Other;
 
 namespace PersonalNovelist_Windows.ViewModels
 {
@@ -16,9 +19,9 @@ namespace PersonalNovelist_Windows.ViewModels
 
         public BookShelfViewModel()
         {
-            IncrementCounterCommand = new RelayCommand(IncrementCounter);
+            AddBookInfmaEventCommand = new RelayCommand(AddBookInfmaEvent);
 
-            Title = "cyc";
+            
         }
 
         private string? _title;
@@ -28,10 +31,11 @@ namespace PersonalNovelist_Windows.ViewModels
             set => SetProperty(ref _title, value);
         }
 
-        public ICommand IncrementCounterCommand { get; }
-        private void IncrementCounter()
+        public ICommand AddBookInfmaEventCommand { get; }
+        private void AddBookInfmaEvent()
         {
-            Title = "tot";
+            AddBookInformation addBookInformation = new AddBookInformation();
+            addBookInformation.Show();
         }
 
 

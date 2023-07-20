@@ -6,7 +6,6 @@
              xmlns:viewmodels="clr-namespace:PersonalNovelist_Windows.ViewModels"
              xmlns:local="clr-namespace:PersonalNovelist_Windows.Pages"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:fa="http://schemas.fontawesome.io/icons/"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:BookShelfViewModel}}"       
              x:Class="PersonalNovelist_Windows.Pages.BookShelves"
              mc:Ignorable="d" 
@@ -30,9 +29,9 @@
                                     <ControlTemplate TargetType="Button">
                                         <Border Background="{TemplateBinding Background}" BorderBrush="#34495e" BorderThickness="2"
                                                 CornerRadius="12">
-                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120">
-                                                <fa:FontAwesome Icon="Plus" Foreground="#2c3e50"/>
-                                            </TextBlock>
+                                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="120"
+                                                       Style="{StaticResource FontAwesome}" Foreground="#34495e" Text="&#xf067;"/>
+
                                         </Border>
                                         <!--设置鼠标放在按钮样式和点击样式-->
                                         <ControlTemplate.Triggers>
@@ -40,10 +39,10 @@
                                                 <Setter Property="Background" Value="#ecf0f1"/>
                                             </Trigger>
                                             <Trigger Property="IsMouseOver" Value="False">
-                                                <Setter Property="Background" Value="{StaticResource PrimaryHueLightBrush}"/>
+                                                <Setter Property="Background" Value="{StaticResource Color1}"/>
                                             </Trigger>
                                             <Trigger Property="IsPressed" Value="True">
-                                                <Setter Property="Background" Value="{StaticResource PrimaryHueMidBrush}"/>
+                                                <Setter Property="Background" Value="{StaticResource Color3}"/>
                                                 <Setter Property="Effect">
                                                     <Setter.Value>
                                                         <DropShadowEffect ShadowDepth="2" BlurRadius="12" Color="#2c3e50" Opacity="1" />

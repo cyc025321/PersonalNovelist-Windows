@@ -23,5 +23,13 @@ namespace PersonalNovelist_Windows.Pages.Other
         {
             InitializeComponent();
         }
+
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // 获取鼠标位置
+            Point mousePosition = e.GetPosition(this);
+            // 启动窗口拖拽操作
+            DragMove();
+        }
     }
 }

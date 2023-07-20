@@ -21,7 +21,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="{StaticResource PrimaryHueLightBrush}" VerticalAlignment="Center">
+        <Grid Grid.Row="0" Background="{StaticResource Color1}" VerticalAlignment="Center">
             <Menu FontFamily="{StaticResource FontMiSans}" VerticalAlignment="Center" FontSize="15"
                   >
                 <MenuItem Header="_文件" Height="Auto">

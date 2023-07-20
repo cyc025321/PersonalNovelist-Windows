@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:PersonalNovelist_Windows.Pages.Other"
              mc:Ignorable="d" Width="140" Height="180">
     <Grid>
-        <materialDesign:Card Background="{StaticResource PrimaryHueLightBrush}">
+        <materialDesign:Card Background="{StaticResource Color1}">
             <StackPanel Orientation="Vertical">
                 <Image Height="100" Width="80" Margin="0,10,0,5" VerticalAlignment="Top" Source="F:\3 Project\PersonalNovelist-Windows\Resources\Icon\BookBackGround2.png"/>
                 <TextBlock Text="《活着》" FontSize="15" Margin="0,2,0,2" HorizontalAlignment="Center" FontWeight="Medium"/>

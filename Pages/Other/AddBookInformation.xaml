@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalNovelist_Windows.Pages.Other"
         mc:Ignorable="d"
-        Title="AddBookInformation" Height="400" Width="300">
-    <Grid>
+        FontFamily="{StaticResource FontMiSans}"
+        Icon="\Resources\Icon\LOGO.png"
+        Title="添加书籍" Height="400" Width="300"
+        WindowStartupLocation="CenterScreen">
+
+
+    <Grid Background="{StaticResource Color1}">
         
+
     </Grid>
 </Window>

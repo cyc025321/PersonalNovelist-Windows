@@ -17,6 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\Font Awesome 6 Free-Regular-400.otf" />
+    <None Remove="Resources\Fonts\FontAwesome.ttf" />
     <None Remove="Resources\Fonts\MiSans-Medium.ttf" />
     <None Remove="Resources\Fonts\MiSans-Semibold.ttf" />
     <None Remove="Resources\Icon\BookBackGround2.png" />
@@ -25,7 +27,6 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
-    <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9" />
     <PackageReference Include="MahApps.Metro" Version="2.4.10" />
     <PackageReference Include="MaterialDesignColors" Version="2.1.4" />
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />
@@ -35,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Fonts\FontAwesome.ttf" />
     <Resource Include="Resources\Fonts\MiSans-Medium.ttf" />
     <Resource Include="Resources\Fonts\MiSans-Semibold.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

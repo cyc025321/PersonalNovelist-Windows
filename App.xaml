@@ -18,9 +18,9 @@
                     <!--
                             包括主调色板中的三种色调（以及相关的前色）。
                             请勿重命名，保持顺序；从亮到暗。-->
-                    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#f5f5f5"/>
-                    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#eeeeee"/>
-                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#e0e0e0"/>
+                    <SolidColorBrush x:Key="Color1" Color="#f5f5f5"/>
+                    <SolidColorBrush x:Key="Color2" Color="#eeeeee"/>
+                    <SolidColorBrush x:Key="Color3" Color="#e0e0e0"/>
                     <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{StaticResource Primary500Foreground}"/>
                     <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource Primary700}"/>
                     <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource Primary700Foreground}"/>
@@ -39,6 +39,9 @@
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="FontMiSans">/PersonalNovelist-Windows;Component/Resources/Fonts/#MiSans Medium</FontFamily>
+            <Style x:Key="FontAwesome" >
+                <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/Resources/Fonts/#FontAwesome" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -19,17 +19,46 @@ namespace PersonalNovelist_Windows.Pages.Other
     /// </summary>
     public partial class AddBookInformation : Window
     {
+
         public AddBookInformation()
         {
             InitializeComponent();
         }
 
-        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+
+
+        private void BookName_MouseEnter(object sender, MouseEventArgs e)
         {
-            // 获取鼠标位置
-            Point mousePosition = e.GetPosition(this);
-            // 启动窗口拖拽操作
-            DragMove();
+            // 创建一个新的Brush对象来设置颜色
+            Brush brush = (Brush)new BrushConverter().ConvertFromString("#30336b");
+            // 将新的Brush对象设置为TextBlock的前景色
+            BookName_ICON.Foreground = brush;
+        }
+
+        private void BookName_MouseLeave(object sender, MouseEventArgs e)
+        {
+            // 创建一个新的Brush对象来设置颜色
+            Brush brush = (Brush)new BrushConverter().ConvertFromString("#7a7a7a");
+            // 将新的Brush对象设置为TextBlock的前景色
+            BookName_ICON.Foreground = brush;
+        }
+        //--------------------
+        //作者
+        
+        private void BookAuthor_MouseEnter(object sender, MouseEventArgs e)
+        {
+            // 创建一个新的Brush对象来设置颜色
+            Brush brush = (Brush)new BrushConverter().ConvertFromString("#30336b");
+            // 将新的Brush对象设置为TextBlock的前景色
+            BookAuthor_ICON.Foreground = brush;
+        }
+
+        private void BookAuthor_MouseLeave(object sender, MouseEventArgs e)
+        {
+            // 创建一个新的Brush对象来设置颜色
+            Brush brush = (Brush)new BrushConverter().ConvertFromString("#7a7a7a");
+            // 将新的Brush对象设置为TextBlock的前景色
+            BookAuthor_ICON.Foreground = brush;
         }
     }
 }

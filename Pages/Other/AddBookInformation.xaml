@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PersonalNovelist_Windows.Pages.Other"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodels="clr-namespace:PersonalNovelist_Windows.ViewModels"
+        d:DataContext="{d:DesignInstance Type={x:Type viewmodels:AddBookInfViewNodel}}"  
         mc:Ignorable="d"
         FontFamily="{StaticResource FontMiSans}"
         Icon="\Resources\Icon\LOGO.png"
@@ -20,7 +21,8 @@
                            Name="BookName_ICON" Foreground="#7a7a7a"/>
                 <TextBox VerticalAlignment="Center" Width="180" MouseEnter="BookName_MouseEnter" 
                          MouseLeave="BookName_MouseLeave" materialDesign:HintAssist.Hint="书籍名称"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Name="BookName_Text"
+                         Text="{Binding BookNameText, Mode=OneWayToSource}"/>
             </StackPanel>
             
             <!--书籍名称-->
@@ -29,17 +31,21 @@
                            Name="BookAuthor_ICON" Foreground="#7a7a7a"/>
                 <TextBox VerticalAlignment="Center" Width="180" MouseEnter="BookAuthor_MouseEnter" 
                          MouseLeave="BookAuthor_MouseLeave" materialDesign:HintAssist.Hint="作者"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Text="{Binding BookAuthorText, Mode=OneWayToSource}"/>
             </StackPanel>
 
             <!--封皮-->
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <TextBlock Style="{StaticResource FontAwesome}" Text="&#xF16B;" FontSize="15" Margin="0,10,10,0"
+                <TextBlock Style="{StaticResource FontAwesome}" Text="&#xF16B;" FontSize="15" Margin="-2,10,10,0"
                            Name="BookCover_ICON" Foreground="#7a7a7a"/>
-                <Grid Width="110" Height="140" Margin="15,10,0,0">
+                <Grid Width="100" Height="120" Margin="15,10,0,0">
                     <Border BorderBrush="#34495e" BorderThickness="1" CornerRadius="5"/>
+                    <TextBlock Text="封皮" Foreground="#7a7a7a" Margin="5,5" FontWeight="Medium"/>
+                    <Image Source="{Binding ImagePath}"/>
                 </Grid>
-                <Button Margin="10,10,0,0">
+                <Button Margin="10,10,0,0" MouseEnter="BookCover_MouseEnter" MouseLeave="BookCover_MouseLeave"
+                        Command="{Binding PickImageEventCommand}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Width" Value="45"/>
@@ -87,12 +93,14 @@
                          materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
                          MaxLength="40" TextWrapping="Wrap"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         VerticalScrollBarVisibility="Auto" />
+                         VerticalScrollBarVisibility="Auto" 
+                         MouseEnter="BookSummary_MouseEnter" MouseLeave="BookSummary_MouseLeave"
+                         Text="{Binding BookSummaryText,Mode=OneWayToSource}"/>
             </StackPanel>
             
             <!--确定取消按钮-->
             <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                <Button Margin="10,10,0,0">
+                <Button Margin="10,10,0,0" Command="{Binding ConfirmedEventCommand}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Width" Value="50"/>
@@ -130,7 +138,7 @@
                     </Button.Style>
                 </Button>
                 <!--取消按钮-->
-                <Button Margin="110,10,0,0">
+                <Button Margin="110,10,0,0" Click="Cancel_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Width" Value="50"/>

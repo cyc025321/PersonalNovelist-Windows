@@ -28,7 +28,12 @@ namespace PersonalNovelist_Windows.Pages
         {
             InitializeComponent();
             this.DataContext = new BookShelfViewModel();
-            aa.Content = new BookCard();
+            BookCard bc = new BookCard();
+            bc.NameItem.Text = "活着";
+            bc.SummaryItem.Text = "这是一本举例的书";
+            aa.Content = bc;
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

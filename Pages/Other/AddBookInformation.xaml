@@ -3,9 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:viewmodels="clr-namespace:PersonalNovelist_Windows.ViewModels"
-        d:DataContext="{d:DesignInstance Type={x:Type viewmodels:AddBookInfViewNodel}}"  
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         mc:Ignorable="d"
         FontFamily="{StaticResource FontMiSans}"
         Icon="\Resources\Icon\LOGO.png"
@@ -22,7 +20,7 @@
                 <TextBox VerticalAlignment="Center" Width="180" MouseEnter="BookName_MouseEnter" 
                          MouseLeave="BookName_MouseLeave" materialDesign:HintAssist.Hint="书籍名称"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Name="BookName_Text"
-                         Text="{Binding BookNameText, Mode=OneWayToSource}"/>
+                         />
             </StackPanel>
             
             <!--书籍名称-->
@@ -32,7 +30,7 @@
                 <TextBox VerticalAlignment="Center" Width="180" MouseEnter="BookAuthor_MouseEnter" 
                          MouseLeave="BookAuthor_MouseLeave" materialDesign:HintAssist.Hint="作者"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                         Text="{Binding BookAuthorText, Mode=OneWayToSource}"/>
+                         Name="BookAuthor_Text" />
             </StackPanel>
 
             <!--封皮-->
@@ -45,7 +43,7 @@
                     <Image Source="{Binding ImagePath}"/>
                 </Grid>
                 <Button Margin="10,10,0,0" MouseEnter="BookCover_MouseEnter" MouseLeave="BookCover_MouseLeave"
-                        Command="{Binding PickImageEventCommand}">
+                        Click="PickImage_click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Width" Value="45"/>
@@ -95,12 +93,12 @@
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          VerticalScrollBarVisibility="Auto" 
                          MouseEnter="BookSummary_MouseEnter" MouseLeave="BookSummary_MouseLeave"
-                         Text="{Binding BookSummaryText,Mode=OneWayToSource}"/>
+                         Name="BookInstroduction_Text" />
             </StackPanel>
             
             <!--确定取消按钮-->
             <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                <Button Margin="10,10,0,0" Command="{Binding ConfirmedEventCommand}">
+                <Button Margin="10,10,0,0" Click="Confirmed_Click">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Width" Value="50"/>

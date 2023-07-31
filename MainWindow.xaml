@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PersonalNovelist_Windows"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         x:Class="PersonalNovelist_Windows.MainWindow"
+        xmlns:viewmodels="clr-namespace:PersonalNovelist_Windows.ViewModels"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        d:DataContext="{d:DesignInstance Type={x:Type viewmodels:MainWindowViewModel}}"  
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
@@ -16,50 +15,43 @@
         mc:Ignorable="d"
         Title="PersonalNovelist" Height="450" Width="800"
         Icon="\Resources\Icon\LOGO.png">
+    
+    
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="{StaticResource Color1}" VerticalAlignment="Center">
-            <Menu FontFamily="{StaticResource FontMiSans}" VerticalAlignment="Center" FontSize="15"
-                  >
-                <MenuItem Header="_文件" Height="Auto">
-                    <MenuItem Header="保存" Icon="{materialDesign:PackIcon Kind=ContentSave}" />
-                    <MenuItem Header="保存为" Icon="{materialDesign:PackIcon Kind=ContentSaveAll}"/>
-                    <MenuItem Header="导入" Icon="{materialDesign:PackIcon Kind=Import}"/>
-                    <MenuItem Header="导出" Icon="{materialDesign:PackIcon Kind=Export}"/>
-                    <MenuItem Header="退出" Icon="{materialDesign:PackIcon Kind=ExitToApp}" InputGestureText="Ctrl+E" />
-                    <Separator />
-                    <MenuItem Header="Excellent" IsCheckable="True" IsChecked="True" />
-                    <MenuItem Header="Rubbish" IsCheckable="True" />
-                    <MenuItem Header="Dig Deeper" InputGestureText="Ctrl+D">
-                    <MenuItem Header="Enlightenment?" IsCheckable="True" />
-                    <MenuItem Header="Disappointment" IsCheckable="True" />
-                    </MenuItem>
-                    <MenuItem Header="Look Deeper" InputGestureText="Ctrl+D">
-                        <MenuItem Header="Plain" />
-                        <MenuItem Header="Ice Cream" />
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="_编辑" Height="30">
-                    <MenuItem Command="Cut" Header="_剪切" Icon="{materialDesign:PackIcon Kind=ContentCut}" />
-                    <MenuItem Command="Copy" Header="_复制" Icon="{materialDesign:PackIcon Kind=ContentCopy}" />
-                    <MenuItem Command="Paste" Header="_粘贴" Icon="{materialDesign:PackIcon Kind=ContentPaste}" />
-                </MenuItem>
-                <MenuItem Header="_工具" Height="Auto">
-                    <MenuItem Header="_主题" Icon="{materialDesign:PackIcon Kind=Palette}" />
-                    <MenuItem Header="_首选项" Icon="{materialDesign:PackIcon Kind=Cog}" />
-                </MenuItem>
-                <MenuItem Header="_帮助" Height="Auto">
-                    <MenuItem Header="_使用手册" Icon="{materialDesign:PackIcon Kind=BookOpenOutline}"/>
-                    <MenuItem Header="_关于" Icon="{materialDesign:PackIcon Kind=Information}" Click="SoftwareAbout_click"/>
-                </MenuItem>
-            </Menu>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Background="{StaticResource Color2}" VerticalAlignment="Stretch" Width="60">
+            <StackPanel Orientation="Vertical" Margin="0,5,0,0">
+                <Image Source="\Resources\Icon\LOGO.png" Width="30"/>
+                <Button Style="{StaticResource NavigationButtons}" Command="{Binding MainBookShelvesCommand}" 
+                        Name="MainBookShl" BorderThickness="{Binding ButtonThick,Mode=OneWay}" Margin="0,5,0,0"
+                        Foreground="{Binding Bo1ForBrush, Mode=TwoWay}" Background="{Binding Bo1BackBrush,Mode=TwoWay}" 
+                        MouseEnter="But_MouseEnter" MouseLeave="But_MouseRelese">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesome}" Text="&#xF00A;" FontSize="25"
+                           Name="BookName_ICON" HorizontalAlignment="Center"/>
+                        <TextBlock Text="书架" FontSize="14" FontWeight="Medium"/>
+                    </StackPanel>
+                   
+                </Button>
+                <Button Style="{StaticResource NavigationButtons}" Command="{Binding EditUICommand}" 
+                        Name="EditUI" BorderThickness="{Binding Button2Thick,Mode=OneWay}" Margin="0,0,0,0"
+                        Foreground="{Binding Bo2ForBrush, Mode=TwoWay}" Background="{Binding Bo2BackBrush,Mode=TwoWay}" 
+                        MouseEnter="But_MouseEnter" MouseLeave="But_MouseRelese">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesome}" Text="&#xF2D0;" FontSize="25"
+                           Name="EditUI_ICON" HorizontalAlignment="Center"/>
+                        <TextBlock Text="编辑" FontSize="14" FontWeight="Medium"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+           
         </Grid>
         <!--主界面-->
-        <Grid Grid.Row="1">
-            <ContentControl x:Name="BookShelve"/>
+        <Grid Grid.Column="1">
+            <ContentControl x:Name="BookShelve" Content="{Binding BookPlainPage}"/>
         </Grid>
         
         

@@ -8,17 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MaterialDesignThemes.Wpf;
-using Microsoft.VisualBasic.ApplicationServices;
-using Microsoft.Win32;
 using PersonalNovelist_Windows.Data;
 using PersonalNovelist_Windows.Pages.Other;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
 namespace PersonalNovelist_Windows.ViewModels
 {
@@ -29,7 +23,12 @@ namespace PersonalNovelist_Windows.ViewModels
         {
             AddBookInfmaEventCommand = new RelayCommand(AddBookInfmaEvent);
             BookShelvesItem = new ObservableCollection<System.Windows.Controls.UserControl>();
+            AddBookInformation = new AddBookInformation();
+            OneAdd = true;
         }
+
+        private bool OneAdd { set; get; }
+        private AddBookInformation AddBookInformation { set; get; }
 
 
         //Item绑定的布局，添加卡片后，自动界面更新
@@ -48,14 +47,28 @@ namespace PersonalNovelist_Windows.ViewModels
         public ICommand AddBookInfmaEventCommand { get; }
         public void AddBookInfmaEvent()
         {
-            AddBookInformation addBookInformation = new AddBookInformation();
-            addBookInformation.ShowDialog();
-            
-            if (addBookInformation.ConfirmConfirmJudgment)
+            if (OneAdd)
             {
-                ADDBookItem(addBookInformation.bookInformation);
+                AddBookInformation.ShowDialog();
+
+                if (AddBookInformation.ConfirmConfirmJudgment)
+                {
+                    ADDBookItem(AddBookInformation.bookInformation);
+                }
+                OneAdd = false;
             }
-  
+            else
+            {
+                AddBookInformation = new();
+                AddBookInformation.ShowDialog();
+
+                if (AddBookInformation.ConfirmConfirmJudgment)
+                {
+                    ADDBookItem(AddBookInformation.bookInformation);
+                }
+            }
+            
+            
         }
 
 

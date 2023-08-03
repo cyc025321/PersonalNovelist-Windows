@@ -78,5 +78,34 @@ namespace PersonalNovelist_Windows
                 MainBookShl.Background = BackGray1Color;
             }
         }
+
+        /// <summary>
+        /// 鼠标2移入事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void But2_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Color color = (Color)ColorConverter.ConvertFromString(EditUI.Background.ToString());
+            if (color.R == 238 && color.G == 238 && color.B == 238)
+            {
+                EditUI.Background = BackGray3Color;
+            }
+        }
+
+        /// <summary>
+        /// 鼠标2移出事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void But2_MouseRelese(object sender, MouseEventArgs e)
+        {
+            Color color = (Color)ColorConverter.ConvertFromString(EditUI.Background.ToString());
+            if (color.R == 224 && color.G == 224 && color.B == 224)
+            {
+                EditUI.Background = BackGray1Color;
+            }
+        }
+
     } 
 }

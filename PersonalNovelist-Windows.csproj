@@ -20,7 +20,8 @@
     <None Remove="Resources\Fonts\Font Awesome 6 Free-Regular-400.otf" />
     <None Remove="Resources\Fonts\FontAwesome.ttf" />
     <None Remove="Resources\Fonts\MiSans-Medium.ttf" />
-    <None Remove="Resources\Fonts\MiSans-Semibold.ttf" />
+    <None Remove="Resources\Fonts\全字库正宋体.ttf" />
+    <None Remove="Resources\Fonts\全字库正楷.ttf" />
     <None Remove="Resources\Icon\BookBackGround2.png" />
     <None Remove="Resources\Icon\LOGO.png" />
   </ItemGroup>
@@ -38,9 +39,8 @@
   <ItemGroup>
     <Resource Include="Resources\Fonts\FontAwesome.ttf" />
     <Resource Include="Resources\Fonts\MiSans-Medium.ttf" />
-    <Resource Include="Resources\Fonts\MiSans-Semibold.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Resources\Fonts\全字库正宋体.ttf" />
+    <Resource Include="Resources\Fonts\全字库正楷.ttf" />
     <Resource Include="Resources\Icon\BookBackGround2.png" />
     <Resource Include="Resources\Icon\LOGO.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

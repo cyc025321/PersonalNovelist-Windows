@@ -39,7 +39,7 @@
                 <Button Style="{StaticResource NavigationButtons}" Command="{Binding EditUICommand}" 
                         Name="EditUI" BorderThickness="{Binding Button2Thick,Mode=OneWay}" Margin="0,0,0,0"
                         Foreground="{Binding Bo2ForBrush, Mode=TwoWay}" Background="{Binding Bo2BackBrush,Mode=TwoWay}" 
-                        MouseEnter="But_MouseEnter" MouseLeave="But_MouseRelese">
+                        MouseEnter="But2_MouseEnter" MouseLeave="But2_MouseRelese">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource FontAwesome}" Text="&#xF2D0;" FontSize="25"
                            Name="EditUI_ICON" HorizontalAlignment="Center"/>

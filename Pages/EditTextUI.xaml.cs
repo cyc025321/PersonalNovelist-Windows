@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PersonalNovelist_Windows.ViewModels;
 
 namespace PersonalNovelist_Windows.Pages
 {
@@ -23,6 +24,12 @@ namespace PersonalNovelist_Windows.Pages
         public EditTextUI()
         {
             InitializeComponent();
+            DataContext = new EditTextUIViewModel();
+        }
+
+        private void rtbEditor_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

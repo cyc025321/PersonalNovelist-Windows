@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PersonalNovelist_Windows.Pages" 
+             xmlns:local="clr-namespace:PersonalNovelist_Windows.Pages"
+             xmlns:viewmodels="clr-namespace:PersonalNovelist_Windows.ViewModels"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DataContext="{d:DesignInstance Type={x:Type viewmodels:EditTextUIViewModel}}" 
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1500" Cursor="Hand">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -25,85 +26,70 @@
         </Grid>
 
         <Grid Grid.Column="1">
-            <StackPanel Orientation="Vertical">
-                <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
-                    <ToolBarTray>
-                        <ToolBar ClipToBounds="False" Style="{StaticResource MaterialDesignToolBar}"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border BorderThickness="0,0,0,1" BorderBrush="Gray" Grid.Row="0">
+                <ToolBarTray VerticalAlignment="Center">
+                    <ToolBar ClipToBounds="False" Style="{StaticResource MaterialDesignToolBar}"
                              >
-                            <Button Content="{materialDesign:PackIcon Kind=ContentSave}" ToolTip="Save" />
-                            <Separator />
-                            <Button Command="Cut" Content="{materialDesign:PackIcon Kind=ContentCut}"
-                        ToolBar.OverflowMode="AsNeeded" ToolTip="Cut" />
-                            <Button Command="Copy" Content="{materialDesign:PackIcon Kind=ContentCopy}"
-                        ToolBar.OverflowMode="AsNeeded" ToolTip="Copy that stuff" />
-                            <Separator />
-                            <Button Command="Paste" Content="{materialDesign:PackIcon Kind=ContentPaste}"
-                        ToolBar.OverflowMode="AsNeeded" ToolTip="Paste some stuff" />
-                            <Separator />
-                            <ListBox>
-                                <ListBoxItem ToolTip="This is a lonley toggle with TextBlock instead of icon">
-                                    <TextBlock Text="W" />
-                                </ListBoxItem>
-                            </ListBox>
-                            <Separator />
-                            <ListBox SelectedIndex="0">
-                                <ListBox.ToolTip>
-                                    <StackPanel>
-                                        <TextBlock Text="MaterialDesignToolToggleFlatListBox" />
-                                        <TextBlock Text="Exclusive selection" />
-                                        <TextBlock Text="ListBoxAssist.IsToggle allows more natural toggle behaviour" />
-                                    </StackPanel>
-                                </ListBox.ToolTip>
-                                <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatAlignLeft}" />
-                                <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatAlignCenter}" />
-                                <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatAlignRight}" />
-                                <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatAlignJustify}" />
-                            </ListBox>
-                            <Separator />
-                            <ListBox SelectionMode="Extended">
-                                <ListBox.ToolTip>
-                                    <StackPanel>
-                                        <TextBlock Text="MaterialDesignToolToggleListBox" />
-                                        <TextBlock Text="Multiple selection" />
-                                        <TextBlock Text="ListBoxAssist.IsToggle allows more natural toggle behaviour" />
-                                    </StackPanel>
-                                </ListBox.ToolTip>
-                                <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatBold}" />
-                                <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatItalic}" />
-                                <ListBoxItem Content="{materialDesign:PackIcon Kind=FormatUnderline}" />
-                            </ListBox>
-                            <Separator />
-                            <Label VerticalAlignment="Center" Content="Font size:" />
-                            <ComboBox>
-                                <ComboBoxItem Content="10" />
-                                <ComboBoxItem Content="12" IsSelected="True" />
-                                <ComboBoxItem Content="14" />
-                                <ComboBoxItem Content="16" />
-                            </ComboBox>
-                            <CheckBox Content="Check" />
-                            <Button Content="{materialDesign:PackIcon Kind=Hotel}" ToolBar.OverflowMode="Always"
-                        ToolTip="Take a nap" />
-                            <Separator />
+                        <Button Content="{materialDesign:PackIcon Kind=ContentSave}" ToolTip="Save" />
+                        <Separator />
+                        <Button Command="Cut" Content="{materialDesign:PackIcon Kind=ContentCut}"
+                                    ToolBar.OverflowMode="AsNeeded" ToolTip="Cut" />
+                        <Button Command="Copy" Content="{materialDesign:PackIcon Kind=ContentCopy}"
+                                    ToolBar.OverflowMode="AsNeeded" ToolTip="Copy that stuff" />
+                        <Separator />
+                        <Button Command="Paste" Content="{materialDesign:PackIcon Kind=ContentPaste}"
+                                ToolBar.OverflowMode="AsNeeded" ToolTip="Paste some stuff" />
+                        <Separator />
 
-                            <Separator />
-                            <ToggleButton />
-                        </ToolBar>
-                    </ToolBarTray>
-                </Border>
-                
+                        <Label VerticalAlignment="Center" Content="字体:" />
+                        <ComboBox ItemsSource="{Binding FontItem}" SelectedIndex="{Binding FontFamilyIndex}">
+                        </ComboBox>
+                        <Label VerticalAlignment="Center" Content="字体大小:" />
+                        <ComboBox>
+                            <ComboBoxItem Content="10" />
+                            <ComboBoxItem Content="12" IsSelected="True" />
+                            <ComboBoxItem Content="14" />
+                            <ComboBoxItem Content="16" />
+                        </ComboBox>
+                        <Label VerticalAlignment="Center" Content="行间距:" />
+                        <CheckBox Content="语法检查" />
+                        <Separator />
+                        <ToggleButton />
+                        <Button Content="{materialDesign:PackIcon Kind=Hotel}" ToolBar.OverflowMode="Always"
+                        ToolTip="Take a nap"/>
+                    </ToolBar>
+                </ToolBarTray>
+            </Border>
 
-                
-            </StackPanel>
-        </Grid>
-        
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <RichTextBox Name="rtbEditor" Grid.Column="0" BorderThickness="0,0,0.5,0" 
+                        SelectionChanged="rtbEditor_SelectionChanged" BorderBrush="Gray"
+                        VerticalScrollBarVisibility ="Visible" HorizontalScrollBarVisibility="Auto"
+                        AcceptsReturn="True" Background="{StaticResource Color3}" FontSize="20"
+                        FontFamily="{Binding FontFam}" Padding="20">
+                    <RichTextBox.Document>
+                        <FlowDocument>
+                            <Paragraph TextIndent="30">
+                            </Paragraph>
+                        </FlowDocument>
+                    </RichTextBox.Document>
+                </RichTextBox>
+                <Grid Grid.Column="1" Width="260">
+                    
+                </Grid>
+            </Grid>
+            
+            
 
-        <Grid Grid.Column="2" Margin="0,20,0,0" Width="100">
-            <TreeView Width="150">
-                <TreeViewItem Header="第一级">
-                    <TreeViewItem Header="第二级">
-                    </TreeViewItem>
-                </TreeViewItem>
-            </TreeView>
+
         </Grid>
     </Grid>
 </UserControl>

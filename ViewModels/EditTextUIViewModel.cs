@@ -9,11 +9,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FontFamily = System.Windows.Media.FontFamily;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace PersonalNovelist_Windows.ViewModels
 {
@@ -42,9 +44,15 @@ namespace PersonalNovelist_Windows.ViewModels
                 new FontFamily(new Uri("pack://application:,,,/"), "./Resources/Fonts/#TW-Kai")
 
         };
+            FontSizeItem = new ObservableCollection<int>
+            {
+                12,14,16,18,20,22,24,26
+            };
 
             FontFamilyIndex = 0;
+            FontSizeIndex = 2;
             FontFam = CustomFonts[FontFamilyIndex];
+            FontSize = FontSizeItem[FontSizeIndex];
         }
 
         /// <summary>
@@ -97,8 +105,6 @@ namespace PersonalNovelist_Windows.ViewModels
                     FontFam = CustomFonts[4];
                     break;
             }
-            // 根据选择的索引执行相应操作
-
         }
 
         /// <summary>
@@ -117,5 +123,84 @@ namespace PersonalNovelist_Windows.ViewModels
             }
         }
 
+        /// <summary>
+        /// ComBox字体尺寸集合
+        /// </summary>
+        private ObservableCollection<int>? _fontSizeItem;
+        public ObservableCollection<int>? FontSizeItem
+        {
+            get => _fontSizeItem;
+            set => SetProperty(ref _fontSizeItem, value);
+        }
+
+
+        /// <summary>
+        /// 字体尺寸索引修改时的变化事件
+        /// </summary>
+        private int _fontSizeIndex;
+        public int FontSizeIndex
+        {
+            get => _fontSizeIndex;
+            set
+            {
+                _fontSizeIndex = value;
+
+                OnFontSizeChanged(value); // 更改字体
+                OnPropertyChanged(); // 通知属性更改
+            }
+        }
+
+        /// <summary>
+        /// 字体尺寸
+        /// </summary>
+        private int _fontSize;
+        public int FontSize
+        { 
+            get => _fontSize;
+            set => SetProperty(ref _fontSize, value);
+        }
+
+        /// <summary>
+        /// 更改字体尺寸方法
+        /// </summary>
+        /// <param name="index">字体Combox索引值</param>
+        private void OnFontSizeChanged(int index)
+        {
+            if (FontSizeItem != null)
+            {
+                switch (index)
+                {
+                    case 0:
+                        FontSize = FontSizeItem[0];
+                        break;
+                    case 1:
+                        FontSize = FontSizeItem[1];
+                        break;
+                    case 2:
+                        FontSize = FontSizeItem[2];
+                        break;
+                    case 3:
+                        FontSize = FontSizeItem[3];
+                        break;
+                    case 4:
+                        FontSize = FontSizeItem[4];
+                        break;
+                    case 5:
+                        FontSize = FontSizeItem[5];
+                        break;
+                    case 6:
+                        FontSize = FontSizeItem[6];
+                        break;
+                    case 7:
+                        FontSize = FontSizeItem[7];
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("设置错误", "提示：", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            
+        }
     }
 }

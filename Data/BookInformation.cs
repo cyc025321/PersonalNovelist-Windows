@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using PersonalNovelist_Windows.Pages;
 
 namespace PersonalNovelist_Windows.Data
 {
     public class BookInformation
     {
+        public BookInformation()
+        {
+            CopyEditTextUI = new(); // 创建编辑控件
+        }
+
         private string? bookName;
         /// <summary>
         /// 书籍名称
@@ -71,5 +78,21 @@ namespace PersonalNovelist_Windows.Data
             get { return bookauthor; }
             set { bookauthor = value; }
         }
+
+        /// <summary>
+        /// 书籍序号，第几本书
+        /// </summary>
+        private int serialNumber = 0;
+        public int SerialNumber
+        {
+            get { return serialNumber; }
+            set { serialNumber = value; }
+        }
+
+        /// <summary>
+        /// 编辑控件
+        /// </summary>
+        public EditTextUI? CopyEditTextUI;
+        
     }
 }

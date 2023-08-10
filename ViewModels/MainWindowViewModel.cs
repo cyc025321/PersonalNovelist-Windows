@@ -16,6 +16,11 @@ using Brush = System.Windows.Media.Brush;
 using Color = System.Windows.Media.Color;
 using PersonalNovelist_Windows.Pages;
 using System.Windows.Controls;
+using System.Windows;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using System.Windows.Forms;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace PersonalNovelist_Windows.ViewModels
 {
@@ -30,6 +35,7 @@ namespace PersonalNovelist_Windows.ViewModels
         //背景颜色深色
         private readonly Brush BackGray2Color = new SolidColorBrush(Color.FromRgb(217, 217, 217));
 
+        private int CurrentBookSerialNumber { set; get; }
 
         public MainWindowViewModel() 
         { 
@@ -45,11 +51,13 @@ namespace PersonalNovelist_Windows.ViewModels
             Bo2BackBrush = BackGray1Color;
             BookShelve = new BookShelves();
             BookPlainPage = BookShelve;
-            EditText = new EditTextUI();
+            // 订阅File1ViewModel中的事件或消息
+            BookShelve.ViewModel.TagNumberEvent += OpenEditUI;
+            CurrentBookSerialNumber = 0;
         }
 
         private BookShelves BookShelve { set; get; }
-        private EditTextUI EditText { set; get; }
+        //private EditTextUI EditText { set; get; }
 
         /// <summary>
         /// 按钮1的bool类型，判断是否激活
@@ -146,42 +154,56 @@ namespace PersonalNovelist_Windows.ViewModels
         public ICommand MainBookShelvesCommand { get; }
         private void MainBookShelves()
         {
-            if (But2bool) 
-            {
-                ButtonThick = new System.Windows.Thickness(0, 0, 4, 0);
-                Bo1ForBrush = ForBlueColor;
-                Bo1BackBrush = BackGray2Color;
-                But1bool = true;
-                BookPlainPage = BookShelve;
-                //按钮2样式控制
-                Button2Thick = new System.Windows.Thickness(0, 0, 0, 0);
-                Bo2ForBrush = ForGrayColor;
-                Bo2BackBrush = BackGray1Color;
-            }
+            ButtonThick = new System.Windows.Thickness(0, 0, 4, 0);
+            Bo1ForBrush = ForBlueColor;
+            Bo1BackBrush = BackGray2Color;
+            //But1bool = true;
+            BookPlainPage = BookShelve;
+            //按钮2样式控制
+            Button2Thick = new System.Windows.Thickness(0, 0, 0, 0);
+            Bo2ForBrush = ForGrayColor;
+            Bo2BackBrush = BackGray1Color;
             
         }
 
+        public void OpenEditUI(int tag)
+        {
+            BookPlainPage = BookInforEvent.BookInforList[tag-1].CopyEditTextUI;
+            CurrentBookSerialNumber = tag - 1;
+            EditUI();
+        }
+
+
         /// <summary>
-        /// 主页编辑界面
+        /// 主页编辑界面AddBookInformation
         /// </summary>
         public ICommand EditUICommand { get; }
         private void EditUI()
         {
-            if (But1bool)
+            // 如果书籍集合有内容，才打开界面，否则提示还未创建书籍
+            if (BookInforEvent.BookInforList.Count > 0)
             {
                 Button2Thick = new System.Windows.Thickness(0, 0, 4, 0);
                 Bo2ForBrush = ForBlueColor;
                 Bo2BackBrush = BackGray2Color;
-                But2bool = true;
-                BookPlainPage = EditText;
+                //But2bool = true;
+                //BookPlainPage = EditText;
                 //按钮一样式控制
                 ButtonThick = new System.Windows.Thickness(0, 0, 0, 0);
                 Bo1ForBrush = ForGrayColor;
                 Bo1BackBrush = BackGray1Color;
-                But1bool = false;
+                //But1bool = false;
+
+                BookPlainPage = BookInforEvent.BookInforList[CurrentBookSerialNumber].CopyEditTextUI;
+            }
+            else
+            {
+                MessageBox.Show("你还未创建一本书籍，请先创建书籍！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
-            
         }
+
+        
+
     }
 }

@@ -7,6 +7,7 @@
              xmlns:viewmodels="clr-namespace:PersonalNovelist_Windows.ViewModels"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:EditTextUIViewModel}}" 
+             FontFamily="{StaticResource FontMiSans}"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1500" Cursor="Hand">
     <Grid Background="White">
@@ -16,12 +17,90 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Background="{StaticResource Color2}">
             <Border CornerRadius="5,0,0,5" BorderThickness="0.5,0,0.5,0" BorderBrush="Gray">
-                <TreeView x:Name="treeView" Width="150" Margin="0,20,0,0">
-                    <TreeViewItem Header="第一级">
-                        <TreeViewItem Header="第二级">
-                        </TreeViewItem>
-                    </TreeViewItem>
-                </TreeView>
+                <StackPanel Orientation="Vertical" Margin="5,5,5,5">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Button Name="NewJuan" Command="">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Height" Value="30"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border BorderBrush="#3c54b4" BorderThickness="1" CornerRadius="5"
+                                                        Background="{TemplateBinding Background}">
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,0,4,0">
+                                                        <TextBlock Style="{StaticResource FontAwesome}" Text="&#xf196;"
+                                                               VerticalAlignment="Center" Foreground="#3c54b4"/>
+                                                        <TextBlock Text="新建卷" Margin="5,0,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!--设置鼠标放在按钮样式和点击样式-->
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#d4d4d4"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver" Value="False">
+                                                        <Setter Property="Background" Value="{StaticResource Color3}"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <DropShadowEffect ShadowDepth="1" BlurRadius="5" Color="#2c3e50" Opacity="1" />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                        <Button Name="NewZhang" Command="" Margin="20,0,5,0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Height" Value="30"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border BorderBrush="#3c54b4" BorderThickness="1" CornerRadius="5"
+                                                        Background="{TemplateBinding Background}">
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="4,0,4,0">
+                                                        <TextBlock Style="{StaticResource FontAwesome}" Text="&#xf196;"
+                                                               VerticalAlignment="Center" Foreground="#3c54b4"/>
+                                                        <TextBlock Text="新建章" Margin="5,0,0,0"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!--设置鼠标放在按钮样式和点击样式-->
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="#d4d4d4"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsMouseOver" Value="False">
+                                                        <Setter Property="Background" Value="{StaticResource Color3}"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter Property="Effect">
+                                                            <Setter.Value>
+                                                                <DropShadowEffect ShadowDepth="1" BlurRadius="5" Color="#2c3e50" Opacity="1" />
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                    <Separator Height="10"/>
+                    <TreeView x:Name="treeView" Width="150" Margin="0,10,0,0">
+                    </TreeView>
+                </StackPanel>
             </Border>
         </Grid>
 
@@ -31,23 +110,18 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Border BorderThickness="0,0,0,1" BorderBrush="Gray" Grid.Row="0">
-                <ToolBarTray VerticalAlignment="Center">
+                <ToolBarTray VerticalAlignment="Center" Height="50">
                     <ToolBar ClipToBounds="False" Style="{StaticResource MaterialDesignToolBar}"
                              >
                         <Button Content="{materialDesign:PackIcon Kind=ContentSave}" ToolTip="Save" />
-                        <Separator />
-                        <Button Command="Cut" Content="{materialDesign:PackIcon Kind=ContentCut}"
-                                    ToolBar.OverflowMode="AsNeeded" ToolTip="Cut" />
-                        <Button Command="Copy" Content="{materialDesign:PackIcon Kind=ContentCopy}"
-                                    ToolBar.OverflowMode="AsNeeded" ToolTip="Copy that stuff" />
-                        <Separator />
-                        <Button Command="Paste" Content="{materialDesign:PackIcon Kind=ContentPaste}"
-                                ToolBar.OverflowMode="AsNeeded" ToolTip="Paste some stuff" />
+
                         <Separator />
 
-                        <ComboBox ItemsSource="{Binding FontItem}" SelectedIndex="{Binding FontFamilyIndex}"/>
+                        <ComboBox ItemsSource="{Binding FontItem,Mode=TwoWay}" SelectedIndex="{Binding FontFamilyIndex,Mode=TwoWay}"
+                                  Width="75" HorizontalAlignment="Center"/>
 
-                        <ComboBox ItemsSource="{Binding FontSizeItem}" SelectedIndex="{Binding FontSizeIndex}"/>
+                        <ComboBox ItemsSource="{Binding FontSizeItem,Mode=TwoWay}" SelectedIndex="{Binding FontSizeIndex,Mode=TwoWay}"
+                                  Width="50"/>
                         <Label VerticalAlignment="Center" Content="行间距:" />
                         <CheckBox Content="语法检查" />
                         <Separator />
@@ -63,18 +137,28 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <RichTextBox Name="rtbEditor" Grid.Column="0" BorderThickness="0,0,0.5,0" 
-                        SelectionChanged="rtbEditor_SelectionChanged" BorderBrush="Gray"
+                <Grid Grid.Column="0" Background="{StaticResource Color3}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"  FontFamily="{Binding FontFam}" Name="TitleName" Text="{Binding TitleName}"
+                               VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,15,0,10"
+                               FontSize="{Binding TitleFontSize}" FontWeight="Bold" />
+                    <RichTextBox Name="EditorText" BorderThickness="0,0,0.5,0" 
+                        BorderBrush="Gray" AcceptsTab="True" Grid.Row="1"
                         VerticalScrollBarVisibility ="Visible" HorizontalScrollBarVisibility="Auto"
-                        AcceptsReturn="True" Background="{StaticResource Color3}" FontSize="{Binding FontSize}"
-                        FontFamily="{Binding FontFam}" Padding="20">
-                    <RichTextBox.Document>
-                        <FlowDocument>
-                            <Paragraph TextIndent="30">
-                            </Paragraph>
-                        </FlowDocument>
-                    </RichTextBox.Document>
-                </RichTextBox>
+                        AcceptsReturn="True" FontSize="{Binding FontSize}"
+                        FontFamily="{Binding FontFam}" Padding="20,10,20,10">
+                        <RichTextBox.Document>
+                            <FlowDocument>
+                                <Paragraph TextIndent="{Binding FirLineIndet}" LineHeight="16" Margin="0,0,0,8"
+                                       >
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox.Document>
+                    </RichTextBox>
+                </Grid>
                 <Grid Grid.Column="1" Width="260">
                     
                 </Grid>

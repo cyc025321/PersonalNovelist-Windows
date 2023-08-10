@@ -8,7 +8,7 @@
              FontFamily="{StaticResource FontMiSans}"
              mc:Ignorable="d" Width="140" Height="180">
     <Grid>
-        <Button Name="bu">
+        <Button Name="BookButton">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="Template">
@@ -16,7 +16,7 @@
                             <ControlTemplate TargetType="Button">
                                 <Border BorderBrush="#34495e" BorderThickness="2" CornerRadius="10" Background="{TemplateBinding Background}">
                                     <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                                      Margin="0" />
+                                                      Margin="0"/>
 
                                 </Border>
 

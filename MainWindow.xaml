@@ -15,8 +15,8 @@
         mc:Ignorable="d"
         Title="PersonalNovelist" Height="450" Width="800"
         Icon="\Resources\Icon\LOGO.png">
-    
-    
+
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -34,7 +34,7 @@
                            Name="BookName_ICON" HorizontalAlignment="Center"/>
                         <TextBlock Text="书架" FontSize="14" FontWeight="Medium"/>
                     </StackPanel>
-                   
+
                 </Button>
                 <Button Style="{StaticResource NavigationButtons}" Command="{Binding EditUICommand}" 
                         Name="EditUI" BorderThickness="{Binding Button2Thick,Mode=OneWay}" Margin="0,0,0,0"
@@ -47,13 +47,17 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-           
+
         </Grid>
         <!--主界面-->
         <Grid Grid.Column="1">
+            <!--<Grid.RowDefinitions>
+                <RowDefinition Height="117*"/>
+                <RowDefinition Height="317*"/>
+            </Grid.RowDefinitions>-->
             <ContentControl x:Name="BookShelve" Content="{Binding BookPlainPage}"/>
         </Grid>
-        
-        
+
+
     </Grid>
 </Window>

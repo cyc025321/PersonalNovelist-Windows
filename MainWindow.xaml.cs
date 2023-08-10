@@ -46,7 +46,7 @@ namespace PersonalNovelist_Windows
 
         private void SoftwareAbout_click (object sender, RoutedEventArgs e)
         {
-            SoftWareAbout softWareAbout = new SoftWareAbout();
+            SoftWareAbout softWareAbout = new();
             softWareAbout.Show();
         }
 

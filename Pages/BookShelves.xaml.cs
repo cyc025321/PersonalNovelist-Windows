@@ -24,11 +24,12 @@ namespace PersonalNovelist_Windows.Pages
     /// </summary>
     public partial class BookShelves : UserControl
     {
+        public BookShelfViewModel ViewModel { get; set; }
         public BookShelves()
         {
             InitializeComponent();
-            this.DataContext = new BookShelfViewModel();
-
+            ViewModel = new BookShelfViewModel();
+            this.DataContext = ViewModel;
 
         }
 

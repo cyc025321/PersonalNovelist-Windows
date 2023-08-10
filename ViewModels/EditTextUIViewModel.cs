@@ -29,20 +29,22 @@ namespace PersonalNovelist_Windows.ViewModels
             FontItem = new ObservableCollection<string>
             {
                 "宋体",
-                "正宋体",
                 "黑体",
+                "正宋体",
+                "正楷体",
                 "小新黑体",
-                "正楷体"
+                "微软雅黑"
+                
             };
 
             CustomFonts = new ObservableCollection<FontFamily>
             {
                 new FontFamily("宋体"),
-                new FontFamily(new Uri("pack://application:,,,/"), "./Resources/Fonts/#TW-Sung-Plus"),
                 new FontFamily("黑体"),
+                new FontFamily(new Uri("pack://application:,,,/"), "./Resources/Fonts/#TW-Sung-Plus"),
+                new FontFamily(new Uri("pack://application:,,,/"), "./Resources/Fonts/#TW-Kai"),
                 new FontFamily(new Uri("pack://application:,,,/"), "./Resources/Fonts/#联想小新黑体 常规"),
-                new FontFamily(new Uri("pack://application:,,,/"), "./Resources/Fonts/#TW-Kai")
-
+                new FontFamily("微软雅黑")
         };
             FontSizeItem = new ObservableCollection<int>
             {
@@ -53,6 +55,7 @@ namespace PersonalNovelist_Windows.ViewModels
             FontSizeIndex = 2;
             FontFam = CustomFonts[FontFamilyIndex];
             FontSize = FontSizeItem[FontSizeIndex];
+            TitleFontSize = CalculatedTitFontSize(FontSize);
         }
 
         /// <summary>
@@ -103,6 +106,9 @@ namespace PersonalNovelist_Windows.ViewModels
                     break;
                 case 4:
                     FontFam = CustomFonts[4];
+                    break;
+                case 5:
+                    FontFam = CustomFonts[5];
                     break;
             }
         }
@@ -195,12 +201,53 @@ namespace PersonalNovelist_Windows.ViewModels
                         FontSize = FontSizeItem[7];
                         break;
                 }
+                TitleFontSize = CalculatedTitFontSize(FontSize);
             }
             else
             {
                 MessageBox.Show("设置错误", "提示：", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }   
+        }
+
+        /// <summary>
+        /// 标题字体尺寸
+        /// </summary>
+        private int _titleFontSize;
+        public int TitleFontSize
+        {
+            get => _titleFontSize;
+            set => SetProperty(ref _titleFontSize, value);
+        }
+
+        /// <summary>
+        /// 计算标题字体尺寸
+        /// </summary>
+        /// <param name="textfontsize">文本字体尺寸</param>
+        /// <returns></returns>
+        private static int CalculatedTitFontSize(int textfontsize)
+        {
+            if (textfontsize % 3 != 0)
+            {
+                double tem = textfontsize / 3;
+                return textfontsize + (int)Math.Floor(tem);
             }
-            
+            else
+            {
+                return textfontsize + textfontsize / 3;
+            }
+        }
+
+        private string? _titleName;
+        public string? TitleName
+        {
+            get => _titleName;
+            set => SetProperty(ref _titleName, value);
+        }
+
+        private readonly int _firLineIndet = 30;
+        public int FirLineIndet
+        {
+            get => _firLineIndet;
         }
     }
 }

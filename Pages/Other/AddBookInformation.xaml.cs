@@ -28,7 +28,7 @@ namespace PersonalNovelist_Windows.Pages.Other
 
         readonly Brush BlueColor = new SolidColorBrush(Color.FromRgb(48, 51, 107));
         readonly Brush GrayColor = new SolidColorBrush(Color.FromRgb(122, 122, 122));
-        public BookInformation bookInformation = new BookInformation();
+        public BookInformation bookInformation = new();
         private string? CoverPath; // 图片路径
         public bool ConfirmConfirmJudgment; //判断是否确认按钮被点击
 
@@ -156,6 +156,7 @@ namespace PersonalNovelist_Windows.Pages.Other
                 bookInformation.BookAuthor = BookAuthor_Text.Text;
                 bookInformation.BookCoverpath = CoverPath;
                 bookInformation.BookInstroduction = BookInstroduction_Text.Text;
+                bookInformation.CopyEditTextUI!.viewModel.TitleName = BookName_Text.Text; //传值
                 ConfirmConfirmJudgment = true;
                 Close();
             }

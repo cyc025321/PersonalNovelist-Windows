@@ -32,7 +32,6 @@ namespace PersonalNovelist_Windows.Pages
             viewModel = new();
             DataContext = viewModel;
             DataObject.AddPastingHandler(EditorText, TextBoxPasting); //处理粘贴命令
-            
         }
         
 

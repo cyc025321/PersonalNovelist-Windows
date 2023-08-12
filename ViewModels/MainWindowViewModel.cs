@@ -35,7 +35,7 @@ namespace PersonalNovelist_Windows.ViewModels
         //背景颜色深色
         private readonly Brush BackGray2Color = new SolidColorBrush(Color.FromRgb(217, 217, 217));
 
-        private int CurrentBookSerialNumber { set; get; }
+        private int CurrentBookSerialNumber { set; get; } //当前编辑框界面序号
 
         public MainWindowViewModel() 
         { 
@@ -141,6 +141,9 @@ namespace PersonalNovelist_Windows.ViewModels
 
         }
 
+        /// <summary>
+        /// 编辑界面空间
+        /// </summary>
         private ContentControl? _bookPlainPage;
         public ContentControl? BookPlainPage
         {
@@ -166,10 +169,13 @@ namespace PersonalNovelist_Windows.ViewModels
             
         }
 
+        /// <summary>
+        /// 打开编辑框事件，与书架的书籍卡片点击事件绑定
+        /// </summary>
+        /// <param name="tag"></param>
         public void OpenEditUI(int tag)
         {
-            BookPlainPage = BookInforEvent.BookInforList[tag-1].CopyEditTextUI;
-            CurrentBookSerialNumber = tag - 1;
+            CurrentBookSerialNumber = tag - 1; //当前编辑框界面序号
             EditUI();
         }
 
@@ -186,14 +192,10 @@ namespace PersonalNovelist_Windows.ViewModels
                 Button2Thick = new System.Windows.Thickness(0, 0, 4, 0);
                 Bo2ForBrush = ForBlueColor;
                 Bo2BackBrush = BackGray2Color;
-                //But2bool = true;
-                //BookPlainPage = EditText;
                 //按钮一样式控制
                 ButtonThick = new System.Windows.Thickness(0, 0, 0, 0);
                 Bo1ForBrush = ForGrayColor;
                 Bo1BackBrush = BackGray1Color;
-                //But1bool = false;
-
                 BookPlainPage = BookInforEvent.BookInforList[CurrentBookSerialNumber].CopyEditTextUI;
             }
             else

@@ -156,7 +156,8 @@ namespace PersonalNovelist_Windows.Pages.Other
                 bookInformation.BookAuthor = BookAuthor_Text.Text;
                 bookInformation.BookCoverpath = CoverPath;
                 bookInformation.BookInstroduction = BookInstroduction_Text.Text;
-                bookInformation.CopyEditTextUI!.viewModel.TitleName = BookName_Text.Text; //传值
+                bookInformation.CopyEditTextUI!.viewModel.Bookname = BookName_Text.Text;
+                bookInformation.CopyEditTextUI!.viewModel.UpdateItems();
                 ConfirmConfirmJudgment = true;
                 Close();
             }

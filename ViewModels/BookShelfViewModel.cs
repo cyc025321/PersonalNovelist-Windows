@@ -79,7 +79,7 @@ namespace PersonalNovelist_Windows.ViewModels
         /// 打开添加书籍界面，输入参数后，创建新的卡片
         /// </summary>
         public ICommand AddBookInfmaEventCommand { get; }
-        public void AddBookInfmaEvent()
+        private void AddBookInfmaEvent()
         {
             AddBookInformation = new();
             AddBookInformation.ShowDialog();
@@ -100,7 +100,7 @@ namespace PersonalNovelist_Windows.ViewModels
         private void ADDBookItem (BookInformation bookInformation)
         {
             BookCard bc = new(); //创建新的卡片
-            bc.NameItem.Text = bookInformation.BookName;
+            bc.NameItem.Text = "《"+ bookInformation.BookName + "》";
             bc.SummaryItem.Text = bookInformation.BookInstroduction;
             bc.Margin = new Thickness(20,0,0,0);
             TotalNumber += 1;

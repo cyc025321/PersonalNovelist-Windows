@@ -14,33 +14,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PersonalNovelist_Windows.Data;
+using PersonalNovelist_Windows.Pages;
 using FontFamily = System.Windows.Media.FontFamily;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace PersonalNovelist_Windows.ViewModels
 {
-    /// <summary>
-    /// 书籍章节Item
-    /// </summary>
-    public class BookChapterItem
-    {
-        public BookChapterItem()
-        {
-            this.ChildrenItems = new ObservableCollection<BookChapterItem>();
-        }
-
-        //层级标题
-        public string? Title { get; set; }
-        
-        //层级下面内容集合
-        public ObservableCollection<BookChapterItem> ChildrenItems { get; set; }
-    }
-
-
-
+    
     public class EditTextUIViewModel : ObservableObject, INotifyPropertyChanged
     {
-
         public EditTextUIViewModel()
         {
             FontItem = new ObservableCollection<string>
@@ -51,7 +34,7 @@ namespace PersonalNovelist_Windows.ViewModels
                 "正楷体",
                 "小新黑体",
                 "微软雅黑"
-                
+
             };
 
             CustomFonts = new ObservableCollection<FontFamily>
@@ -78,13 +61,58 @@ namespace PersonalNovelist_Windows.ViewModels
             //VolumeBool = false;
             //VolumeCurrentNum = 0;
         }
+        /// <summary>
+        /// 书籍序号
+        /// </summary>
+        private int editSerialNumber = 0;
+        public int EditSerialNumber
+        {
+            get { return editSerialNumber; }
+            set 
+            { 
+                if (value == 0)
+                {
+                    editSerialNumber = value;
+                    ChangeItems(value);
+                }
+                else if (value != editSerialNumber)
+                {
+                    editSerialNumber = value;
+                    ChangeItems(value);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 更改Items方法
+        /// </summary>
+        private void ChangeItems(int Num)
+        {
+            Items = BookInforEvent.BookInforList[Num].Items;
+        }
+
+        /// <summary>
+        /// 选中treeview节点事件
+        /// </summary>
+        private BookChapterItem? selectedItem;
+        public BookChapterItem? SelectedItem
+        {
+            get { return selectedItem; }
+            set
+            {
+                selectedItem = value;
+                //OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
 
         /// <summary>
         /// 初始化界面，treeview的第一个层级title
         /// </summary>
-        public void UpdateItems()
+        public void UpdateItems(string bookname)
         {
-            Items!.Add(new BookChapterItem() { Title = "《"+ Bookname + "》"});
+            Bookname = bookname;
+            Items!.Add(new BookChapterItem() { Title = bookname, NodeType=0, FatherNode=0, SelfNode=0});
+            Items[0].IsExpanded = true; // 展开
         }
 
         /// <summary>
@@ -99,25 +127,48 @@ namespace PersonalNovelist_Windows.ViewModels
 
         //private bool VolumeBool; // 是否有卷，层级
         //private int VolumeCurrentNum { set; get; }
+        private int curVolumeNum;
+        private int curChaterNum;
+        public int CurVolumeNum { get => curVolumeNum; set => curVolumeNum = value; }
+        public int CurChaterNum { get => curChaterNum; set => curChaterNum = value; }
+
+        private int aa = 0;
         /// <summary>
         /// 添加卷，按钮点击事件
         /// </summary>
         public ICommand AddVolumeCommand { get; }
         private void AddVolume()
         {
-            if (Items![0].ChildrenItems!.Count == 0)
+            if (InputVolChaName !=  null)
             {
-                Items[0].ChildrenItems.Add(new BookChapterItem() { Title = "第一卷" } );
-            }
-            else
-            {
-                int tem = Items[0].ChildrenItems.Count;
-                Items[0].ChildrenItems.Add(new BookChapterItem() { Title = "第二卷" });
+                int len = Items![0].ChildrenItems.Count; // 获取集合长度
+                string tem = NumToChinese.NumberToChinese(len+1);
+                Items![0].ChildrenItems.Add(new BookChapterItem() { Title ="第" + tem + "卷:" + InputVolChaName, 
+                    TextContent = Convert.ToString(aa),
+                    NodeType=1, FatherNode=0, SelfNode=len});
+                aa++;
+                BookInforEvent.BookInforList[EditSerialNumber].Items = Items;
+                InputVolChaName = null;
             }
 
         }
 
+        private string? _selectText;
+        public string? SelectText
+        {
+            get => _selectText;
+            set => SetProperty(ref _selectText, value);
+        }
 
+        /// <summary>
+        /// 输入卷名
+        /// </summary>
+        private string? _inputVolChaName;
+        public string? InputVolChaName
+        {
+            get => _inputVolChaName;
+            set => SetProperty(ref _inputVolChaName, value);
+        }
 
         // 章节目录，第一层书籍名字
         public string? Bookname;
@@ -301,6 +352,8 @@ namespace PersonalNovelist_Windows.ViewModels
         }
 
         private string? _titleName;
+        
+
         public string? TitleName
         {
             get => _titleName;
@@ -309,6 +362,5 @@ namespace PersonalNovelist_Windows.ViewModels
                 SetProperty(ref _titleName, value);
             }
         }
-
     }
 }

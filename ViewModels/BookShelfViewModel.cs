@@ -56,7 +56,7 @@ namespace PersonalNovelist_Windows.ViewModels
         public BookShelfViewModel()
         {
             AddBookInfmaEventCommand = new RelayCommand(AddBookInfmaEvent);
-            BookShelvesItem = new ObservableCollection<System.Windows.Controls.UserControl>();
+            BookShelvesItem = new ObservableCollection<UserControl>();
             TotalNumber = 0; //书籍序号
         }
 
@@ -106,7 +106,8 @@ namespace PersonalNovelist_Windows.ViewModels
             TotalNumber += 1;
             bc.BookButton.Tag = TotalNumber;
             bookInformation.SerialNumber = TotalNumber; // 书籍序号
-            BookInforEvent.BookInforList.Add(bookInformation); // 把书籍添加到集合中
+            bookInformation.Items.Add(new BookChapterItem() { Title = bc.NameItem.Text });
+            BookInforEvent.AddItem(bookInformation); // 把书籍添加到集合中
             bc.BookButton.Click += (o, e) => {
                 Button? button = o as Button;
                 int newTagNumber = (int)button!.Tag;

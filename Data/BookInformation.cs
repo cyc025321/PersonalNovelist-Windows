@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -12,7 +14,7 @@ namespace PersonalNovelist_Windows.Data
     {
         public BookInformation()
         {
-            CopyEditTextUI = new(); // 创建编辑控件
+            Items = new ObservableCollection<BookChapterItem>(); // 创建编辑控件
         }
 
         private string? bookName;
@@ -92,7 +94,30 @@ namespace PersonalNovelist_Windows.Data
         /// <summary>
         /// 编辑控件
         /// </summary>
-        public EditTextUI? CopyEditTextUI;
-        
+        public ObservableCollection<BookChapterItem> Items;
+    }
+
+    /// <summary>
+    /// 书籍章节Item
+    /// </summary>
+    public class BookChapterItem
+    {
+        public BookChapterItem()
+        {
+            ChildrenItems = new ObservableCollection<BookChapterItem>();
+            IsExpanded = false;
+        }
+
+        //层级标题
+        public string? Title { get; set; }
+
+        public int NodeType { get; set; } // 节点类型，0 书名，1 卷名, 2 章节名
+        public string? TextContent { get; set; }   // 文本内容
+
+        public int FatherNode { get; set; } // 父节点
+        public int SelfNode { get; set; } // 自己所在节点位置
+        public bool IsExpanded { get; set; } // 是否展开
+        //层级下面内容集合
+        public ObservableCollection<BookChapterItem> ChildrenItems { get; set; }
     }
 }

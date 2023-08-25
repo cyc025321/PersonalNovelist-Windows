@@ -41,8 +41,8 @@ namespace PersonalNovelist_Windows.ViewModels
         { 
             MainBookShelvesCommand  = new RelayCommand(MainBookShelves);
             EditUICommand = new RelayCommand(EditUI);
-            ButtonThick = new System.Windows.Thickness(0,0,4,0);
-            Button2Thick = new System.Windows.Thickness(0,0,0,0);
+            ButtonThick = new Thickness(0,0,4,0);
+            Button2Thick = new Thickness(0,0,0,0);
             Bo1ForBrush = ForBlueColor;
             Bo1BackBrush = BackGray2Color;
             But1bool = true;
@@ -50,14 +50,15 @@ namespace PersonalNovelist_Windows.ViewModels
             Bo2ForBrush = ForGrayColor;
             Bo2BackBrush = BackGray1Color;
             BookShelve = new BookShelves();
+            EditText = new EditTextUI();
             BookPlainPage = BookShelve;
+            CurrentBookSerialNumber = 0;
             // 订阅File1ViewModel中的事件或消息
             BookShelve.ViewModel.TagNumberEvent += OpenEditUI;
-            CurrentBookSerialNumber = 0;
         }
 
         private BookShelves BookShelve { set; get; }
-        //private EditTextUI EditText { set; get; }
+        private EditTextUI EditText { set; get; }
 
         /// <summary>
         /// 按钮1的bool类型，判断是否激活
@@ -82,8 +83,8 @@ namespace PersonalNovelist_Windows.ViewModels
         /// <summary>
         /// 按钮的边界宽度
         /// </summary>
-        private System.Windows.Thickness _buttonThick;
-        public System.Windows.Thickness ButtonThick
+        private Thickness _buttonThick;
+        public Thickness ButtonThick
         {
             get => _buttonThick;
             set => SetProperty(ref _buttonThick, value);
@@ -133,8 +134,8 @@ namespace PersonalNovelist_Windows.ViewModels
         /// <summary>
         /// 按钮的边界宽度
         /// </summary>
-        private System.Windows.Thickness _button2Thick;
-        public System.Windows.Thickness Button2Thick
+        private Thickness _button2Thick;
+        public Thickness Button2Thick
         {
             get => _button2Thick;
             set => SetProperty(ref _button2Thick, value);
@@ -175,7 +176,7 @@ namespace PersonalNovelist_Windows.ViewModels
         /// <param name="tag"></param>
         public void OpenEditUI(int tag)
         {
-            CurrentBookSerialNumber = tag - 1; //当前编辑框界面序号
+            CurrentBookSerialNumber = tag-1;
             EditUI();
         }
 
@@ -196,12 +197,12 @@ namespace PersonalNovelist_Windows.ViewModels
                 ButtonThick = new System.Windows.Thickness(0, 0, 0, 0);
                 Bo1ForBrush = ForGrayColor;
                 Bo1BackBrush = BackGray1Color;
-                BookPlainPage = BookInforEvent.BookInforList[CurrentBookSerialNumber].CopyEditTextUI;
+                BookPlainPage = EditText;
+                EditText.viewModel.EditSerialNumber = CurrentBookSerialNumber;
             }
             else
             {
                 MessageBox.Show("你还未创建一本书籍，请先创建书籍！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
         }
 

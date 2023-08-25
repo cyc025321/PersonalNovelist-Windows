@@ -40,7 +40,7 @@
                 <Grid Width="100" Height="120" Margin="15,10,0,0">
                     <Border BorderBrush="#34495e" BorderThickness="1" CornerRadius="5"/>
                     <TextBlock Text="封皮" Foreground="#7a7a7a" Margin="5,5" FontWeight="Medium"/>
-                    <Image Source="{Binding ImagePath}"/>
+                    <Image Name="CoverImage" Source="{Binding ImagePath}"/>
                 </Grid>
                 <Button Margin="10,10,0,0" MouseEnter="BookCover_MouseEnter" MouseLeave="BookCover_MouseLeave"
                         Click="PickImage_click">

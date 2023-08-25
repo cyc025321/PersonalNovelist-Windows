@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PersonalNovelist_Windows.Data;
 using PersonalNovelist_Windows.ViewModels;
 using DataFormats = System.Windows.DataFormats;
 using DataObject = System.Windows.DataObject;
@@ -39,8 +40,22 @@ namespace PersonalNovelist_Windows.Pages
         private static void TextBoxPasting(object sender, DataObjectPastingEventArgs e)
         {
             e.DataObject = new DataObject(DataFormats.UnicodeText, e.DataObject.GetData(DataFormats.UnicodeText) as string ?? string.Empty);
-            
         }
 
+
+        //节点树点击事件
+        private void MainTreeview_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+
+            BookChapterItem? selectedItem = e.NewValue as BookChapterItem;
+            
+            if (selectedItem!.NodeType != 0)
+            {
+                viewModel.SelectText = selectedItem.TextContent;
+                viewModel.CurVolumeNum = selectedItem.FatherNode; // 当前节点数
+                viewModel.CurChaterNum = selectedItem.SelfNode;
+            }
+            
+        }
     }
 }
